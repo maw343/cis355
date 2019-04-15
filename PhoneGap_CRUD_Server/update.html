@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body onload="loadDoc();">
+
+<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/hu_vars.js"></script>
+<script>
+    function getID() {
+        id = window.location.search.substring(1);
+        id = id.split("=");
+        return id[1];
+    } $.get("https://csis.svsu.edu/~mawilbur/cis355/PhoneGap_CRUD_Server/update.php", function(data) { 
+        if( data == "false" ) { 
+            location.href = "index.html"; 
+        }
+    });
+    
+    function loadDoc() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("body").innerHTML =
+          xhttp.responseText;
+        }
+      };
+      xhttp.open("GET", "https://csis.svsu.edu/~mawilbur/cis355/PhoneGap_CRUD_Server/update.php?id=" + getID(), true);
+      xhttp.send();
+    } 
+    $(document).ready( function() {
+            $("#update").click( function() {
+                var name=$("#name").val();
+                var email=$("#email").val();
+                var mobile=$("#mobile").val();                
+                var dataString=
+					 "id="+getID()
+                    +"&name="+name
+                    +"&email="+email
+                    +"&mobile="+mobile
+                    +"&update=";
+                if(   $.trim(name).length>0 
+                    & $.trim(email).length>0 
+                    & $.trim(mobile).length>0) {
+                    $.ajax( {
+                        type: "POST",
+                        url: "https://csis.svsu.edu/~mawilbur/cis355/PhoneGap_CRUD_Server/update.php",
+                        data: dataString,
+                        crossDomain: true,
+                        cache: false,
+                        beforeSend: function(){ $("#update").val('Connecting...');},
+                        success: function(data){ location.href = "index.html"; }
+                    });
+                }
+            });
+        });
+</script>
+
+    <div class="padding">
+        <div id="body">
+		
+        </div>
+        <div class="form-actions">
+            <input type="button" id="update" class="btn btn-success" value="Update"/>
+            <a class="btn btn-info" href="index.html">Back</a>
+        </div>
+    </div>
+
+</body>
+</html>
