@@ -294,7 +294,7 @@ class Customer {
         echo "
             </head>
             <body>
-                <a href='https://github.com/maw343/cis355' target='_blank'>Github</a><br />
+                <a href='https://github.com/maw343/cis355/tree/master/PhpProject2_Login' target='_blank'>Github</a><br />
                 <a href='prog2_diagram.pdf' target='_blank'>Prog2 Diagram</a><br />
                 <div class='container'>
                     <p class='row'> 
